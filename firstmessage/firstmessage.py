@@ -35,9 +35,8 @@ class FirstMessage(commands.Cog):
         if channel is None:
             channel = ctx.channel
         try:
-            message: discord.Message = (
-                await channel.history(limit=1, oldest_first=True).flatten()
-            )[0]
+            async for msg in channel.history(limit=1, oldest_first=True):
+                 message: discord.Message = msg
         except (discord.Forbidden, discord.HTTPException):
             log.exception(f"Unable to read message history for {channel.id=}")
             await ctx.maybe_send_embed("Unable to read message history for that channel")
