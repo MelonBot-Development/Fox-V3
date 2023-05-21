@@ -43,6 +43,6 @@ class FirstMessage(commands.Cog):
             return
 
         em = discord.Embed(description=f"[First Message in {channel.mention}]({message.jump_url})")
-        em.set_author(name=message.author.display_name, icon_url=message.author.avatar.url)
+        em.set_author(name=message.author.display_name, icon_url=message.author.avatar.url if message.author.avatar else message.author.display_avatar.url)
 
         await ctx.send(embed=em)
